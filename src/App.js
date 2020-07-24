@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import BFS from './BFS/BFS2';
+import BFS from './BFS/BFS';
 
 
 function App() {
