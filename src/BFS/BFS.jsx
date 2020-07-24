@@ -331,6 +331,16 @@ fillHex(canvasID, center, fillColor) {
 }
 
 handleClick() {
+
+  const { currentHex, cameFrom } = this.state;
+  const {q,r,s}=currentHex;
+  if(cameFrom[JSON.stringify(this.Hex(q,r,s))])
+  {
+    this.setState(
+      {playerPosition: this.Hex(q,r,s)},
+      this.breadthFirstSearchCallback = () => this.breadthFirstSearch(this.state.playerPosition)
+    )
+  }
   
 }
 
@@ -422,7 +432,7 @@ breadthFirstSearch(playerPosition)
       ctx.beginPath();
       ctx.moveTo(fromx,fromy);
       ctx.lineTo(tox,toy);
-      ctx.strokeStyle = "#05b9f5";
+      ctx.strokeStyle = "#DC143C";
       ctx.lineWidth=3;
       ctx.stroke();
       ctx.beginPath();
@@ -432,10 +442,10 @@ breadthFirstSearch(playerPosition)
       ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
       ctx.lineTo(tox,toy);
       ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
-      ctx.StrokeStyle = "#05b9f5";
+      ctx.StrokeStyle = "#DC143C";
       ctx.lineWidth=5;
       ctx.stroke();
-      ctx.fillStyle= "#05b9f5";
+      ctx.fillStyle= "#DC143C";
       ctx.fill();
     }
 
