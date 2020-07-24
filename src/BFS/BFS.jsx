@@ -80,6 +80,7 @@ export default class BFS extends React.Component {
             this.drawHex(this.canvasView,this.Point(x,y),1,"black","grey",0.2);
             var from = JSON.parse(nextState.cameFrom[l]);
             var fromCoord = this.hexToPixel(this.Hex(from.q,from.r));
+            this.drawArrow(fromCoord.x,fromCoord.y,x,y);
         }
         return true;
     }
@@ -412,6 +413,32 @@ breadthFirstSearch(playerPosition)
             this.drawHex(this.canvasInteraction,this.Point(x,y),1,"black","#05b9f5");
         }
     }
+
+    drawArrow(fromx,fromy,tox,toy)
+    {
+      var ctx = this.canvasView.getContext("2d");
+      var headlen=5;
+      var angle= Math.atan2(toy-fromy,tox-fromx);
+      ctx.beginPath();
+      ctx.moveTo(fromx,fromy);
+      ctx.lineTo(tox,toy);
+      ctx.strokeStyle = "#05b9f5";
+      ctx.lineWidth=3;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(tox,toy);
+      ctx.globalAlpha=0.3;
+      ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
+      ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
+      ctx.lineTo(tox,toy);
+      ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
+      ctx.StrokeStyle = "#05b9f5";
+      ctx.lineWidth=5;
+      ctx.stroke();
+      ctx.fillStyle= "#05b9f5";
+      ctx.fill();
+    }
+
 
 
   render() {
